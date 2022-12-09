@@ -6,6 +6,7 @@ import torchvision.datasets as dsets
 # import torchvision.transforms as transforms
 import matplotlib.pyplot as plt
 from model import KNNClassify
+from config import root
 
 batch_size = 100
 pred_size = 110  # 计算测试集数目，0 代表全部数据
@@ -38,11 +39,11 @@ def centralized(x_test, mean_image):
 
 
 # set Cifar10 dataset
-train_dataset = dsets.CIFAR10(root='../dataset',  # 数据集所在目录
+train_dataset = dsets.CIFAR10(root=root,  # 数据集所在目录
                               train=True,  # 选择训练集
                               download=True)
 
-test_dataset = dsets.CIFAR10(root='../dataset',
+test_dataset = dsets.CIFAR10(root=root,
                              train=False,  # 选择测试集
                              download=True)
 
@@ -59,6 +60,8 @@ test_loader = DataLoader(dataset=test_dataset,
 
 if __name__ == '__main__':
     image_show(7)  # 可视化图片
+
+    '''
 
     x_train = train_loader.dataset.data
 
@@ -95,5 +98,5 @@ if __name__ == '__main__':
     acc = float(num_correct) / num_test
 
     print('分类命中 %d / %d 个结果，正确率：%.2f%%' % (int(num_correct), num_test, acc * 100))
-    
+
     '''
