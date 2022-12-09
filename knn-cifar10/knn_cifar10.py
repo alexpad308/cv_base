@@ -61,8 +61,6 @@ test_loader = DataLoader(dataset=test_dataset,
 if __name__ == '__main__':
     image_show(7)  # 可视化图片
 
-    '''
-
     x_train = train_loader.dataset.data
 
     # 图像归一化处理
@@ -79,7 +77,7 @@ if __name__ == '__main__':
     if pred_size:
         y_test = y_test[:pred_size]
 
-    num_test = y_test.shape[0]
+    num_test = len(y_test)
 
     # 构建 KNN 分类模型
     # knn = KNNClassify(k=6, dis='M')
@@ -89,7 +87,7 @@ if __name__ == '__main__':
 
     # sklearn 实现的 knn 算法优化速度更快
     # algorithm ： {‘auto’，‘ball_tree’，‘kd_tree’，‘brute’}，默认auto
-    knn = KNeighborsClassifier(n_neighbors=3, p=2)  # p=2 默认代表L2距离
+    knn = KNeighborsClassifier(n_neighbors=6, p=1)  # p=1 代表L1曼哈顿距离
 
     knn.fit(x_train, y_train)
     y_pred = knn.predict(x_test)
@@ -98,5 +96,3 @@ if __name__ == '__main__':
     acc = float(num_correct) / num_test
 
     print('分类命中 %d / %d 个结果，正确率：%.2f%%' % (int(num_correct), num_test, acc * 100))
-
-    '''
